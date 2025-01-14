@@ -1,0 +1,38 @@
+<div class="container mt-4">
+
+  <ng-container>
+    <google-map height="600px" width="100%" (zoomChanged)="zooming()" [zoom]="zoom"
+                [center]="center"  [options]="optionsSingle">
+      <map-marker #markerElem1="mapMarker" *ngFor="let marker of markers; index as i" [position]="marker?.position"
+                  [options]="arrayOfOptions[i]" (mapClick)="openInfo(markerElem1, marker?.info)">
+      </map-marker>
+      <map-info-window>
+        <p>{{tipData | json}} </p>
+      </map-info-window>
+    </google-map>
+  </ng-container>
+  <ng-container>
+    <div class="mt-5"></div>
+    <p-table [value]="Data" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>id</th>
+          <th>Name</th>
+          <th>Lat | Lng</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+        <tr>
+          <td>{{ data.id }}</td>
+          <td>{{ data.name }}</td>
+          <td>{{ data.location }}</td>
+          <td>
+            <span class="btn btn-outline-primary mx-1" (click)="send()">Start</span>
+            <span class="btn btn-outline-danger mx-1" (click)="stopInterval()">Stop</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-container>
+</div>

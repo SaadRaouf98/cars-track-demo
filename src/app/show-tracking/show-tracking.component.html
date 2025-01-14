@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <ng-container>
+    <google-map height="600px" width="100%" (zoomChanged)="zooming()" [zoom]="zoom"
+                [center]="center"  [options]="optionsSingle">
+      <map-marker #markerElem1="mapMarker" *ngFor="let marker of markers; index as i" [position]="marker?.position"
+                  [options]="arrayOfOptions[i]" >
+      </map-marker>
+      <map-polyline [options]="polylineOptions">
+      </map-polyline>
+    </google-map>
+  </ng-container>
+
+</div>
